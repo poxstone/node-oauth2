@@ -1,0 +1,18 @@
+extends layout
+block header
+  -//script(src='https://rawgit.com/buberdds/angular-bootstrap-colorpicker/master/js/bootstrap-colorpicker-module.js')
+  script(src='/js/token.js')
+block content
+  include ./menu
+  main(ng-app='app'): div(ng-controller='ContToken as crudToken')
+    small.errors {{crudToken.errores}}
+    hr
+    div(ng-if="crudToken.users") {{crudToken.users}}
+    h2 generate token
+    label code:
+      input(type='text',ng-model='crudToken.toSave.code',ng-value='#{code}')
+    label grant_type:
+      input(type='text',ng-model='crudToken.toSave.grant_type',value="authorization_code")
+    label redirect_uri:
+      input(type='text',ng-model='crudToken.toSave.redirect_uri',placeholder="self url redirect client")
+    button(ng-click="crudToken.sendCode()") Generate Token ( LOGIN CLient: ID and secret )

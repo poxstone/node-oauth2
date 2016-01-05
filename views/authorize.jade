@@ -1,0 +1,15 @@
+extends layout
+block header
+  -//script(src='https://rawgit.com/buberdds/angular-bootstrap-colorpicker/master/js/bootstrap-colorpicker-module.js')
+  script(src='/js/authorize.js')
+block content
+  main(ng-app='app'): div
+    h2 Hi <q>#{user.username}</q>
+    p:b The client <b><q>#{client.name}</q></b> is requesting <i>full access to your account.</i>
+    p Do you approve?
+
+    form(action="/oauth2/authorize",method="post")
+      input(name="transaction_id",type="hidden",value="#{transactionID}")
+      fieldset
+        input(type="submit",value="Allow",id="allow")
+        input(type="submit",value="Deny",name="cancel",id="deny")

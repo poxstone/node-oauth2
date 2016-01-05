@@ -1,0 +1,20 @@
+extends layout
+block header
+  -//script(src='https://rawgit.com/buberdds/angular-bootstrap-colorpicker/master/js/bootstrap-colorpicker-module.js')
+  script(src='/js/users.js')
+block content
+  include ./menu
+  main(ng-app='app'): div(ng-controller='Conttlusers as crudUser')
+    small.errors {{crudUser.errores}}
+    hr
+    div(ng-if="crudUser.users") {{crudUser.users}}
+    h2 Create or update User
+    label username:
+      input(type='text',ng-model='crudUser.toSave.username')
+    label password:
+      input(type='password',ng-model='crudUser.toSave.password')
+    button(ng-click="crudUser.saveUser()") Save user
+    div(ng-if="crudUser.urlSearch")
+      hr
+      a(ng-href="{{crudUser.tokenurl}}")
+        b Autorizar acceso desde cliente

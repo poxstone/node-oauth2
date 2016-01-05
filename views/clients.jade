@@ -1,0 +1,24 @@
+extends layout
+block header
+  -//script(src='https://rawgit.com/buberdds/angular-bootstrap-colorpicker/master/js/bootstrap-colorpicker-module.js')
+  script(src='/js/clients.js')
+block content
+  include ./menu
+  main(ng-app='app'): div(ng-controller='ConttlClients as crudClients')
+    small.errors {{crudClients.errores}}
+    hr
+    div(ng-if="crudClients.users") {{crudClients.users}}
+    h2 add/update Clients
+    label name:
+      input(type='text',ng-model='crudClients.toSave.name')
+    label id:
+      input(type='text',ng-model='crudClients.toSave.id')
+    label secret:
+      input(type='password',ng-model='crudClients.toSave.secret')
+    label redirect_uri:
+      input(type='text',ng-model='crudClients.toSave.redirect_uri')
+    button(ng-click="crudClients.saveUser()") Save client
+    hr
+    center
+      a(ng-href="{{crudClients.oauth2Href}}",ng-if="crudClients.oauth2Href")
+        b NOW GO TO "oauth2 authorize this client"
